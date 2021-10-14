@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "a backend for notes app using graphql and mongo",
   "main": "dist/index.js",
-  "type": "module",
   "scripts": {
     "build": "tsc",
     "start": "tsc & node .",
@@ -12,7 +11,7 @@
   "author": "ManuelMaciel",
   "license": "MIT",
   "dependencies": {
-    "apollo-server": "^3.4.0",
+    "apollo-server-express": "^3.4.0",
     "express": "^4.17.1",
     "graphql": "^15.6.1"
   },
