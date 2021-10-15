@@ -6,7 +6,9 @@ const prisma = new PrismaClient();
 export const resolvers = {
   // Resolvers from Querys
   Query: {
-
+    getNotes: async () => {
+      return prisma.notes.findMany()
+    },
   },
   // Resolvers from Mutations
   Mutation: {
