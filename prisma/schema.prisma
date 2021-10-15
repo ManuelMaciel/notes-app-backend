@@ -14,5 +14,5 @@ generator client {
 model Notes {
   id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
   title String
-  note String
+  content String
 }
