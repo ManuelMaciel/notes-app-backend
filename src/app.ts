@@ -3,7 +3,7 @@ import { ApolloServer } from 'apollo-server-express'
 
 const app = express()
 
-const startApolloServer = async (typeDefs, resolvers, app) => {
+const startApolloServer = async ({ typeDefs, resolvers, app }: { typeDefs: any; resolvers: any; app: any }) => {
   const server = new ApolloServer({
     resolvers,
     typeDefs,
