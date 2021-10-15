@@ -35,7 +35,6 @@ export const resolvers = {
           }
         })
         const token = jwt.sign({ userId: user?.id}, 'secret')
-        console.log('context: ', _context)
         return {
           user,
           token
