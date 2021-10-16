@@ -1,5 +1,8 @@
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
+import {
+  ApolloServerPluginLandingPageGraphQLPlayground
+} from "apollo-server-core";
 import dotenv from 'dotenv'
 
 import { decodedToken } from './utils/decodeJWT'
@@ -26,6 +29,9 @@ const startApolloServer = async ({ typeDefs, resolvers, app }: { typeDefs: any; 
     resolvers,
     typeDefs,
     context: createContext,
+    plugins: [
+      ApolloServerPluginLandingPageGraphQLPlayground(),
+    ]
   })
 
   await server.start()
@@ -35,7 +41,7 @@ const startApolloServer = async ({ typeDefs, resolvers, app }: { typeDefs: any; 
   })
 
   await new Promise(resolve => app.listen({ port: process.env.PORT }, resolve));
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
+  console.log(`🚀 Server ready at http://${process.env.DEPLOY ? process.env.PROD : process.env.LOCAL}:${process.env.PORT}${server.graphqlPath}`);
 }
 
 
