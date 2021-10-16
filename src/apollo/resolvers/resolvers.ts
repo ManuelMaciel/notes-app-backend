@@ -34,7 +34,7 @@ export const resolvers = {
             password: encryptedPassword,
           }
         })
-        const token = jwt.sign(user, process.env.SECRET, )
+        const token = jwt.sign({user: user.id}, process.env.SECRET, )
         return {
           user,
           token
