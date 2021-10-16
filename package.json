@@ -7,6 +7,7 @@
     "build": "tsc",
     "start": "tsc & node .",
     "dev": "tsc -w & nodemon .",
+    "start:prod": "node dist/app.js",
     "generate": "npx prisma generate"
   },
   "author": "ManuelMaciel",
