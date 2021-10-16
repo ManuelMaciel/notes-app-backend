@@ -1,12 +1,27 @@
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
+import dotenv from 'dotenv'
+
+import { decodedToken } from './utils/decodeJWT'
 
 const app = express()
+
+dotenv.config()
+
+
+
+
+const createContext = ({req}: any) => {
+
+  const user = decodedToken(req)
+  return user
+}
 
 const startApolloServer = async ({ typeDefs, resolvers, app }: { typeDefs: any; resolvers: any; app: any }) => {
   const server = new ApolloServer({
     resolvers,
     typeDefs,
+    context: createContext
   })
 
   await server.start()

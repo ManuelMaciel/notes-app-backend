@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 
 export const resolvers = {
@@ -25,7 +25,7 @@ export const resolvers = {
 
       if(userExist !== null) throw new UserInputError(`El usuario con el correo: ${email}, ya existe.`)
       // if user not exist, create new user
-      const encryptedPassword = await bcrypt.hash(password, 10)
+      const encryptedPassword = await bcrypt.hash(password, 10, )
       try {
         const user = await prisma.user.create({
           data: {
@@ -34,7 +34,7 @@ export const resolvers = {
             password: encryptedPassword,
           }
         })
-        const token = jwt.sign({ userId: user?.id}, 'secret')
+        const token = jwt.sign(user, process.env.SECRET, )
         return {
           user,
           token
@@ -44,13 +44,14 @@ export const resolvers = {
       }
     },
 
-    publishNote: async (_parent: any, {title, content}: any, _context: any, _info: any ) => {
-      return prisma.notes.create({
-        data: {
-          content,
-          title,
-        }
-      })
+    publishNote: async (_parent: any, {title, content, pinned, color}: any, _context: any, _info: any ) => {
+      // return prisma.notes.create({
+      //   data: {
+      //     content,
+      //     title,
+      //   }
+      // })
+      console.log("context: ", _context)
     },
   }
 }
