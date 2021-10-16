@@ -12,16 +12,20 @@ dotenv.config()
 
 
 const createContext = ({req}: any) => {
-
-  const user = decodedToken(req)
-  return user
+  const header: string = req.headers.authorization
+  if(header !== undefined){
+    const user = decodedToken(header)
+    return user
+  } else {
+    return 'Token de Autorizacion no proveido'
+  }
 }
 
 const startApolloServer = async ({ typeDefs, resolvers, app }: { typeDefs: any; resolvers: any; app: any }) => {
   const server = new ApolloServer({
     resolvers,
     typeDefs,
-    context: createContext
+    context: createContext,
   })
 
   await server.start()
