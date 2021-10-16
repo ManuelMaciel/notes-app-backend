@@ -11,6 +11,9 @@ DATABASE_URL="mongodb+srv:/<user>:<password>@<cluster>.mongodb.net/<database>"
 ```
 SECRET="<YOUR SECRET KEY>"
 ```
+```
+PORT="<YOUR PORT>"
+```
 then install the dependencies
 ```bash
 npm install
