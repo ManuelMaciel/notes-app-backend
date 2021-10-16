@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server-express'
 
 export const typeDefs = gql`
+  scalar Date
 
   type User {
     id: ID!
@@ -8,6 +9,7 @@ export const typeDefs = gql`
     email: String!
     password: String!
     notes: [Note]
+    avatar: String!
   }
 
   type AuthPayload {
@@ -23,16 +25,17 @@ export const typeDefs = gql`
     color: String
     user: User!
     userId: ID!
+    updated_at: Date!
   }
 
   type Query {
-    getNotes: [Note!]
-    getNotesByUser: [Note!]
+    getNotesByUser(user_id: ID!): [Note!]
   }
 
   type Mutation {
     createNewUser(name: String!, email: String!, password: String!): AuthPayload
-    # publishNote(title: String!, content: String!, pinned: Boolean, color: String): Note
-    publishNote: Note
+    publishNote(title: String!, content: String!, pinned: Boolean, color: String): Note
+    deleteNote(note_id: ID): Boolean
+    updateNote(note_id: ID!, title: String, content: String, pinned: Boolean, color: String): Note
   }
 `
